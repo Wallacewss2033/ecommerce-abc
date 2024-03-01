@@ -11,7 +11,7 @@ class OrderTest extends TestCase
 {
     public function test_model_of_order(): void
     {
-        $order = Order::factory()->create([
+        $order = Order::create([
             'amount' => 21.98,
             'sales_id' => 2,
             'status' => 1,

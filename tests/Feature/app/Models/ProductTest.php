@@ -8,8 +8,6 @@ use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_model_of_product()
     {
         $product = Product::factory()->create([
