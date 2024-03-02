@@ -13,13 +13,11 @@ class OrderTest extends TestCase
     {
         $order = Order::create([
             'amount' => 21.98,
-            'sales_id' => 2,
             'status' => 1,
         ]);
 
         $this->assertDatabaseHas('orders', [
             'amount' => $order->amount,
-            'sales_id' => $order->sales_id,
             'status' => $order->status,
         ]);
     }

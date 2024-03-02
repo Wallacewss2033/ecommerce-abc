@@ -12,7 +12,6 @@ class Order extends Model
 
     protected $fillable = [
         'amount',
-        'sales_id',
         'status'
     ];
 

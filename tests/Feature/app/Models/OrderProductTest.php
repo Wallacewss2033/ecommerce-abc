@@ -16,7 +16,6 @@ class OrderProductTest extends TestCase
     {
         $order = Order::create([
             'amount' => 21.98,
-            'sales_id' => 2,
             'status' => 1,
         ]);
 
@@ -46,7 +45,6 @@ class OrderProductTest extends TestCase
 
         $order = Order::create([
             'amount' => 21.98,
-            'sales_id' => 2,
             'status' => 1,
         ]);
 

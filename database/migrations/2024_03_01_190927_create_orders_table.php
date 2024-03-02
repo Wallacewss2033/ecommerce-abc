@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount', 10, 2)->nullable();
-            $table->integer('sales_id')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
         });
