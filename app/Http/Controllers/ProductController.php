@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected Product $product;
+
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
+
     public function index()
     {
-        $products = Product::where('available', 1)->paginate(10);
+        $products = $this->product::where('available', 1)->paginate(10);
         return response()->json($products, 200);
     }
 }
