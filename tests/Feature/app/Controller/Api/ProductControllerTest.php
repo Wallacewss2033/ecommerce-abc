@@ -12,7 +12,7 @@ class ProductControllerTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_example(): void
+    public function test_endpoint_list_of_products(): void
     {
         $response = $this->get('/api/products');
 
