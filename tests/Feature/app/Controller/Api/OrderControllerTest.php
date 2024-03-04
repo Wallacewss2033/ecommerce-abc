@@ -34,4 +34,26 @@ class OrderControllerTest extends TestCase
         $this->assertEquals(36.49, $result);
         $response->assertStatus(201);
     }
+
+    public function test_endpoint_list_of_orders_without_filter(): void
+    {
+        $response = $this->get('/api/orders', []);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                "data",
+            ]);
+    }
+
+    public function test_endpoint_list_of_orders_with_filter(): void
+    {
+        $response = $this->get('/api/orders', [
+            'filter' => ["status" => "CART"]
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                "data",
+            ]);
+    }
 }
