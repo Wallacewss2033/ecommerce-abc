@@ -28,3 +28,4 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::post('/orders/create', [OrderController::class, 'store']);
 Route::get('/orders/{id}', [OrderController::class, 'show']);
+Route::delete('/orders/cancel/{id}', [OrderController::class, 'cancel']);

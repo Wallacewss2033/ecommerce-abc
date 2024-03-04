@@ -6,6 +6,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderController extends Controller
 {
@@ -34,5 +35,15 @@ class OrderController extends Controller
     {
         $orders = $orderService->getOrdersById($id);
         return OrderResource::collection($orders);
+    }
+
+    public function cancel($id)
+    {
+        $order = Order::find($id);
+        if (!$order) {
+            throw new NotFoundHttpException();
+        }
+        $order->delete();
+        return response()->json(['message' => 'Venda cancelada com sucesso']);
     }
 }
