@@ -26,7 +26,7 @@ class OrderControllerTest extends TestCase
             ]
         ]);
 
-        $response = $this->post('/api/orders', [
+        $response = $this->post('/api/orders/create', [
             'products' => $products->toArray()
         ]);
 
