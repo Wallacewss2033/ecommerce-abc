@@ -14,8 +14,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount', 10, 2)->nullable();
-            $table->enum('status', array_column(OrderStatusEnum::cases(), 'name'));
+            $table->decimal('price', 10, 2)->nullable();
+            $table->json('productJson');
+            $table->enum('status', array_column(OrderStatusEnum::cases(), 'value'));
             $table->timestamps();
         });
     }

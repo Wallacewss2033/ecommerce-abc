@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index(Request $request, OrderService $orderService)
     {
         $orders = $orderService->listOrders($request->all());
-        return OrderResource::collection($orders->get());
+        return OrderResource::collection($orders);
     }
 
     public function store(Request $request, OrderService $orderService)
@@ -33,6 +33,6 @@ class OrderController extends Controller
     public function show($id, OrderService $orderService)
     {
         $orders = $orderService->getOrdersById($id);
-        return OrderResource::collection($orders->get());
+        return OrderResource::collection($orders);
     }
 }

@@ -12,8 +12,9 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'amount',
-        'status'
+        'price',
+        'status',
+        'productJson'
     ];
 
     protected $casts = [

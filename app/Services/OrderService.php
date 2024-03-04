@@ -4,9 +4,6 @@ namespace App\Services;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Throwable;
 
 class OrderService
 {
@@ -19,11 +16,16 @@ class OrderService
 
     public function createOrder(array $request): void
     {
-        $total = array_sum(array_column($request["products"], 'price'));
+        $total = 0;
+        foreach ($request["products"] as $product) {
+            $total += $product["price"] * $product["amount"];
+        }
+
         $productsIds = array_column($request["products"], 'id');
 
         $this->order->create([
-            'amount' => $total,
+            'price' => $total,
+            'productJson' => json_encode($request["products"]),
             'status' => OrderStatusEnum::PENDING,
         ])->products()->attach($productsIds);
     }
@@ -32,13 +34,13 @@ class OrderService
     {
         if (isset($request["filter"]["status"]) && !empty($request["filter"]["status"])) {
             $status = $request["filter"]["status"];
-            return $this->order->where('status', OrderStatusEnum::getName($status))->with('products');
+            return $this->order->where('status', OrderStatusEnum::getName($status))->get();
         }
-        return $this->order->with('products');
+        return $this->order->get();
     }
 
     public function getOrdersById($id)
     {
-        return $this->order::where('id', $id)->with('products');
+        return $this->order::where('id', $id)->get();
     }
 }
