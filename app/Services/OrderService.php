@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class OrderService
 
         $this->order->create([
             'amount' => $total,
-            'status' => 1,
+            'status' => OrderStatusEnum::PENDING,
         ])->products()->attach($productsIds);
     }
 }
