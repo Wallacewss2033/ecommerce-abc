@@ -17,7 +17,6 @@ class OrderService
         $this->order = $order;
     }
 
-
     public function createOrder(array $request): void
     {
         $total = array_sum(array_column($request["products"], 'price'));
@@ -27,5 +26,15 @@ class OrderService
             'amount' => $total,
             'status' => OrderStatusEnum::PENDING,
         ])->products()->attach($productsIds);
+    }
+
+    public function listOrders(array $request)
+    {
+
+        if (isset($request["filter"]["status"]) && !empty($request["filter"]["status"])) {
+            $status = $request["filter"]["status"];
+            return $this->order->where('status', OrderStatusEnum::getName($status))->with('products');
+        }
+        return $this->order->with('products');
     }
 }
