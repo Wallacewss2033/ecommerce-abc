@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Rotas para produtos
 Route::get('/products', [ProductController::class, 'index']);
+
+//Rotas para orders
+Route::post('/orders', [OrderController::class, 'store']);
