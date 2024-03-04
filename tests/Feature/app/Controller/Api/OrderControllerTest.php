@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\app\Controller\Api;
 
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -50,6 +51,17 @@ class OrderControllerTest extends TestCase
         $response = $this->get('/api/orders', [
             'filter' => ["status" => "CART"]
         ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                "data",
+            ]);
+    }
+
+    public function test_endpoint_of_orders_specific(): void
+    {
+        $id = Order::first()->id;
+        $response = $this->get("/api/orders/" . $id, []);
 
         $response->assertStatus(200)
             ->assertJsonStructure([
