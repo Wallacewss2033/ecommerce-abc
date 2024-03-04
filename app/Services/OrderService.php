@@ -30,11 +30,15 @@ class OrderService
 
     public function listOrders(array $request)
     {
-
         if (isset($request["filter"]["status"]) && !empty($request["filter"]["status"])) {
             $status = $request["filter"]["status"];
             return $this->order->where('status', OrderStatusEnum::getName($status))->with('products');
         }
         return $this->order->with('products');
+    }
+
+    public function getOrdersById($id)
+    {
+        return $this->order::where('id', $id)->with('products');
     }
 }

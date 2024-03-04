@@ -29,4 +29,10 @@ class OrderController extends Controller
             'message' => 'Venda realizada com sucesso!'
         ], 201);
     }
+
+    public function show($id, OrderService $orderService)
+    {
+        $orders = $orderService->getOrdersById($id);
+        return OrderResource::collection($orders->get());
+    }
 }
