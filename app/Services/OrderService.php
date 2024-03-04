@@ -10,19 +10,17 @@ use Throwable;
 class OrderService
 {
     protected Order $order;
-    protected array $request;
 
-    public function __construct(Order $order, array $request)
+    public function __construct(Order $order)
     {
         $this->order = $order;
-        $this->request = $request;
     }
 
 
-    public function createOrder(): void
+    public function createOrder(array $request): void
     {
-        $total = array_sum(array_column($this->request["products"], 'price'));
-        $productsIds = array_column($this->request["products"], 'id');
+        $total = array_sum(array_column($request["products"], 'price'));
+        $productsIds = array_column($request["products"], 'id');
 
         $this->order->create([
             'amount' => $total,

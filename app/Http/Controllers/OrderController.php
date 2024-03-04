@@ -15,11 +15,9 @@ class OrderController extends Controller
         $this->order = $order;
     }
 
-    public function store(Request $request)
+    public function store(Request $request, OrderService $orderService)
     {
-        $orderService = new OrderService($this->order, $request->all());
-        $orderService->createOrder();
-
+        $orderService->createOrder($request->all());
         return response()->json([
             'message' => 'Venda realizada com sucesso!'
         ], 201);
