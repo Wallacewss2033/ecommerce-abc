@@ -79,4 +79,12 @@ class OrderControllerTest extends TestCase
                 "data",
             ]);
     }
+
+    public function test_endpoint_of_cancel_orders_specific(): void
+    {
+        $id = Order::first()->id;
+        $response = $this->delete("/api/orders/cancel/" . $id);
+
+        $response->assertStatus(200);
+    }
 }
