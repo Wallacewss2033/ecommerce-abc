@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\app\Models;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
@@ -14,16 +15,20 @@ class OrderProductTest extends TestCase
 {
     public function test_model_of_order_product(): void
     {
-        $order = Order::create([
-            'amount' => 21.98,
-            'status' => 1,
-        ]);
 
         $product = Product::create([
             'name' => 'Celular 12',
             'price' => 10.99,
             'description' => 'Celular top de linha',
             'available' => true,
+        ]);
+
+        $product->amount = 1;
+
+        $order = Order::create([
+            'price' => 21.98,
+            'status' => 1,
+            'productJson' => $product
         ]);
 
         $order->products()->attach($product->id);
@@ -43,9 +48,12 @@ class OrderProductTest extends TestCase
             'available' => true,
         ]);
 
+        $product->amount = 1;
+
         $order = Order::create([
-            'amount' => 21.98,
+            'price' => 21.98,
             'status' => 1,
+            'productJson' => $product,
         ]);
 
         $order->products()->attach($product->id);

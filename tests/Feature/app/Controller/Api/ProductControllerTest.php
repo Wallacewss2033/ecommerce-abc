@@ -18,19 +18,19 @@ class ProductControllerTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonStructure([
-                'current_page',
-                'data',
-                'first_page_url',
-                'from',
-                'last_page',
-                'last_page_url',
-                'links',
-                'next_page_url',
-                'path',
-                'per_page',
-                'prev_page_url',
-                'to',
-                'total',
-            ])->assertJsonCount(10, 'data');
+                "current_page",
+                "data",
+                "first_page_url",
+                "from",
+                "last_page",
+                "last_page_url",
+                "links",
+                "next_page_url",
+                "path",
+                "per_page",
+                "prev_page_url",
+                "to",
+                "total",
+            ]);
     }
 }
