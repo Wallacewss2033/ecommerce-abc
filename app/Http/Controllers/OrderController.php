@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     public function index(Request $request, OrderService $orderService)
     {
-        $orders = $orderService->listOrders($request);
+        $orders = $orderService->getOrders($request);
         return OrderResource::collection($orders);
     }
 

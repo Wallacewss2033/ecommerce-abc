@@ -30,7 +30,7 @@ class OrderService
         ])->products()->attach($productsIds);
     }
 
-    public function listOrders(Request $request)
+    public function getOrders(Request $request)
     {
         if ($status = $request->input('filter.status')) {
             return $this->order->where('status', OrderStatusEnum::getName($status))->get();
