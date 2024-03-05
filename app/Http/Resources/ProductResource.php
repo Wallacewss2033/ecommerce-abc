@@ -12,13 +12,18 @@ class ProductResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+
+    public function toArray(Request $request)
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'price' => $this->price,
-            'amount' => $this->amount,
-        ];
+        $products = collect($this->resource)
+            ->map(function ($product) {
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'amount' => $product->amount,
+                ];
+            });
+        return $products;
     }
 }
