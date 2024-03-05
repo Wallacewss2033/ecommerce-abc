@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatusEnum;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Services\OrderService;
@@ -33,17 +34,20 @@ class OrderController extends Controller
 
     public function show($id, OrderService $orderService)
     {
-        $orders = $orderService->getOrdersById($id);
-        return OrderResource::collection($orders);
-    }
-
-    public function cancel($id)
-    {
-        $order = Order::find($id);
+        $order = $orderService->getOrdersById($id);
         if (!$order) {
             throw new NotFoundHttpException();
         }
-        $order->delete();
+        return OrderResource::collection($order);
+    }
+
+    public function cancel($id, OrderService $orderService)
+    {
+        $order = $orderService->getOrdersById($id);
+        if (!$order) {
+            throw new NotFoundHttpException();
+        }
+        $order->status = OrderStatusEnum::CANCELED;
         return response()->json(['message' => 'Venda cancelada com sucesso']);
     }
 }
