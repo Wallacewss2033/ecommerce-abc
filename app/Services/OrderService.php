@@ -26,7 +26,7 @@ class OrderService
         $this->order->create([
             'price' => $total,
             'productJson' => json_encode($request->input('products')),
-            'status' => OrderStatusEnum::PENDING,
+            'status' => OrderStatusEnum::CART,
         ])->products()->attach($productsIds);
     }
 
