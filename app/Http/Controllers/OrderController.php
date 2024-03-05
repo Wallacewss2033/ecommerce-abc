@@ -19,13 +19,13 @@ class OrderController extends Controller
 
     public function index(Request $request, OrderService $orderService)
     {
-        $orders = $orderService->listOrders($request->all());
+        $orders = $orderService->listOrders($request);
         return OrderResource::collection($orders);
     }
 
     public function store(Request $request, OrderService $orderService)
     {
-        $orderService->createOrder($request->all());
+        $orderService->createOrder($request);
         return response()->json([
             'message' => 'Venda realizada com sucesso!'
         ], 201);

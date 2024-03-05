@@ -14,12 +14,12 @@ class OrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $productJson = json_decode($this->productJson, false);
-
+        dd($this);
+        $productJson = json_decode($this->productJson);
         return [
             "id" => $this->id,
             "price" => $this->price,
-            "products" => $productJson
+            "products" => new ProductResource($productJson)
         ];
     }
 }
