@@ -14,7 +14,7 @@ class OrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $productJson = json_decode($this->productJson);
+        $productJson = json_decode($this->resource->productJson);
         return [
             "id" => $this->id,
             "price" => $this->price,

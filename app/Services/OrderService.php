@@ -33,9 +33,9 @@ class OrderService
     public function getOrders(Request $request)
     {
         if ($status = $request->input('filter.status')) {
-            return $this->order->where('status', OrderStatusEnum::getName($status))->get();
+            return $this->order->where('status', OrderStatusEnum::getName($status));
         }
-        return $this->order->get();
+        return $this->order;
     }
 
     public function getOrdersById($id)

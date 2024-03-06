@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     public function index(Request $request, OrderService $orderService)
     {
-        $orders = $orderService->getOrders($request);
+        $orders = $orderService->getOrders($request)->get();
         return OrderResource::collection($orders);
     }
 
@@ -34,11 +34,11 @@ class OrderController extends Controller
 
     public function show($id, OrderService $orderService)
     {
-        $order = $orderService->getOrdersById($id)->get();
+        $order = $orderService->getOrdersById($id);
         if (!$order) {
             throw new NotFoundHttpException();
         }
-        return OrderResource::collection($order);
+        return new OrderResource($order);
     }
 
     public function cancel($id, OrderService $orderService)
