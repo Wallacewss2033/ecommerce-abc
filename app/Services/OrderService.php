@@ -40,6 +40,6 @@ class OrderService
 
     public function getOrdersById($id)
     {
-        return $this->order::where('id', $id)->get();
+        return $this->order::find($id);
     }
 }

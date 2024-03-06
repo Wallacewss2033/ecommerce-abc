@@ -34,7 +34,7 @@ class OrderController extends Controller
 
     public function show($id, OrderService $orderService)
     {
-        $order = $orderService->getOrdersById($id);
+        $order = $orderService->getOrdersById($id)->get();
         if (!$order) {
             throw new NotFoundHttpException();
         }
@@ -48,6 +48,7 @@ class OrderController extends Controller
             throw new NotFoundHttpException();
         }
         $order->status = OrderStatusEnum::CANCELED;
+        $order->save();
         return response()->json(['message' => 'Venda cancelada com sucesso']);
     }
 }
